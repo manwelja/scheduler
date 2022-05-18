@@ -3,8 +3,7 @@ import "./styles.scss";
 
 export default function Show(props) {
 const { student, interviewer, onEdit, onDelete } = props;
-console.log(props)
-  return (
+   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
         <h2 className="text--regular">{ student }</h2>

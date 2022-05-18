@@ -1,15 +1,12 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Header from "./Header";
 import Empty from "./Empty";
 import Show from "./Show";
-import Error from "./Error";
-import Confirm from "./Confirm";
-import Status from "./Status";
-import Form from "./Form";
+
 
 export default function Appointment(props) {
- const{ id, interview, time} = props;
-console.log(interview)
+ const{ interview, time} = props;
+
   return(
     <article className="appointment">
       <Header time={ time }/>

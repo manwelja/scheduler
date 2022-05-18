@@ -33,7 +33,7 @@ export default function Form(props) {
             value={ student }
             onChange={(event) => { 
               setStudent(event.target.value);
-              console.log(event.target.value) }}
+            }}
           />
         </form>
         <InterviewerList 
