@@ -49,13 +49,13 @@ storiesOf("Button", module)
       backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
     })
     .add("Monday", () => (
-      <DayList days={days} day={"Monday"} key={days.id} setDay={action("setDay")} />
+      <DayList days={days} value={"Monday"} key={days.id} onChange={action("setDay")} />
     ))
     .add("Tuesday", () => (
-      <DayList days={days} day={"Tuesday"} key={days.id} setDay={action("setDay")} />
+      <DayList days={days} value={"Tuesday"} key={days.id} onChange={action("setDay")} />
     ))
     .add("Wednesday", () => (
-        <DayList days={days} day={"Wednesday"} key={days.id} setDay={action("setDay")} />
+        <DayList days={days} value={"Wednesday"} key={days.id} onChange={action("setDay")} />
     ));
 
     const interviewer = {
@@ -112,12 +112,12 @@ storiesOf("InterviewerListItem", module)
   .add("Selected", () => (
     <InterviewerList
       interviewers={interviewers}
-      interviewer={3}
+      value={3}    
     />
   ))
   .add("Clickable", () => (
     <InterviewerList
       interviewers={interviewers}
-      setInterviewer={action("setInterviewer")}
+      onChange={action("setInterviewer")}
     />
   ));
