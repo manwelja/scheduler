@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import "components/Application.scss";
 
 import DayList from "components/DayList";
 import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment"
-
-const days = [
-  { id: 1, name: "Monday", spots: 2 },
-  { id: 2, name: "Tuesday", spots: 5 },
-  { id: 3, name: "Wednesday", spots: 0 },
-];
 
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -63,7 +58,18 @@ const appointments = {
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
   const [interviewer, setInterviewer] = useState(1);
+  const [days, setDays] = useState([]);
 
+  useEffect(() => {
+    axios.get("/api/days")
+    .then((res) => {
+      console.log(res.data);
+      setDays(res.data);
+   }).catch((error) => {
+    // handle error
+    console.log(error);
+   });
+  }, [])
   const apptArray = Object.values(appointments).map((appointment) => {
     return(
       <Appointment 
