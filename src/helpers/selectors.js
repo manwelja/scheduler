@@ -32,3 +32,21 @@ export function getInterview(state, interview) {
  
   return formatInterview;
 }
+
+export function getInterviewersForDay(state, day) {
+  //get the appt ids for the selected day
+  const filteredApptDay = state.days.filter(sDay => sDay.name === day);
+  const interviewerArr = [];
+  
+  //if no matching days return empty array
+  if(filteredApptDay.length === 0) return [];
+ 
+  const interviewersKeysArr = filteredApptDay[0].interviewers;
+  
+  //get all interviewer objects that correspond to the interveiwer ids for the selected day
+  interviewersKeysArr.forEach((element) => {
+    if (state.interviewers[String(element)]) interviewerArr.push(state.interviewers[String(element)])     
+  });    
+  
+  return interviewerArr;
+}

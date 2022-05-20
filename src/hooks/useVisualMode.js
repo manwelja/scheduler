@@ -7,10 +7,9 @@ export default function useVisualMode(initial) {
   const transition = (tMode, replaceFlag = false)  => {
     setMode(tMode);
 
+    //if replaceFlag is true, remove the last state from history then add the new one, otherwise just add the new state to the history array
     if (replaceFlag) history.pop();
     setHistory([...history, tMode]);
-
-    //if replaceFlag is true, remove the last state from history then add the new one, otherwise just add the new state to the history array
     //replaceFlag ?  setHistory([...history.slice(0, history.length-1), tMode]) : setHistory([...history, tMode]);
     
   }  
@@ -22,6 +21,5 @@ export default function useVisualMode(initial) {
     setHistory(history);
     //setHistory(history.slice(0, history.length-1)) 
   };
-
   return { mode, transition, back };
 }
