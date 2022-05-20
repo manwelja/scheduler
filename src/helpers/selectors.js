@@ -19,3 +19,16 @@ export function getAppointmentsForDay(state, day) {
  
   
 }
+//Function to format the interview object
+export function getInterview(state, interview) {
+  //if there is no interview, return null
+  if(!interview) return null;
+
+  //create a shallow copy of the interview object
+  const formatInterview = {...interview};
+
+  //replace the interviewer id in the interview object with their full data from the state object
+  formatInterview.interviewer = state.interviewers[String(interview.interviewer)];
+ 
+  return formatInterview;
+}
