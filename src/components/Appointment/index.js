@@ -13,8 +13,10 @@ export default function Appointment(props) {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
+  const DELETING = "DELETING";
+  const CONFIRM = "CONFIRM";
   
-  const{ id, interview, time, interviewers, bookInterview } = props;
+  const{ id, interview, time, interviewers, bookInterview, cancelInterview } = props;
   
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
@@ -35,24 +37,43 @@ bookInterview(id, interview)
  
 }
 
+function cancel(id) {
+  //conform that the user wants to delete
+  transition(CONFIRM);
+  //Display the deleting indicator
+  transition(DELETING);
+  //delete the selected interview and set the transition state for the block to empty
+  cancelInterview(id)
+  .then(() => {
+    setTimeout(transition(EMPTY), 1000)
+  });
+ 
+}
+
   return(
     <article className="appointment">
       <Header time={ time }/>
-        {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+        {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}        
         {mode === SHOW && (
           <Show
             student={interview.student}
             interviewer={interview.interviewer}
+            onDelete={() => cancel(id)}
           />)}
         {mode === CREATE && (
           <Form
             interviewers = { interviewers }
             onSave ={save}
-            onCancel ={() => transition(EMPTY)}
+            onCancel ={() => transition(EMPTY)}  
+
           />)}  
         {mode === SAVING && (
           <Status
             message={"Saving"}            
+          />)}
+        {mode === DELETING && (
+          <Status
+            message={"Deleting"}            
           />)}
     </article>
   );

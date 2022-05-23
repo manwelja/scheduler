@@ -42,14 +42,36 @@ export default function Application(props) {
     };
     console.log(appointment.interview.interviewer)
 
-  //add the new interview to the scheduler api
-  //return the promise so we can update the schedule page AFTER the api is updated
- return axios.put(`api/appointments/${id}`, {interview: {student: appointment.interview.student, interviewer: appointment.interview.interviewer}})
-  .then((res) => {
-   //add the new appointment to the state object
-   setState({...state, appointments});
-  })
-} 
+    //add the new interview to the scheduler api
+    //return the promise so we can update the schedule page AFTER the api is updated
+    return axios.put(`api/appointments/${id}`, {interview: {student: appointment.interview.student, interviewer: appointment.interview.interviewer}})
+      .then((res) => {
+      //add the new appointment to the state object
+      setState({...state, appointments});
+    })
+  } 
+  function cancelInterview(id) {
+   
+    const appointment = {
+      ...state.appointments[id],
+      interview: state.interview
+    };
+
+    const appointments = {
+      ...state.appointments, 
+      [id]: appointment    
+    };
+    state.appointments[id].interview = null;
+
+    return axios.delete(`api/appointments/${id}`)
+    .then((res) => {
+      //appointments[id].interview= null;
+      //delete the appointment from the state object (putting appointments last overwrites what was prev defined in the state object)
+      //console.log(appointments)
+      setState({...state, appointments});
+     // console.log("new state", state)
+    })
+  }
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);  
   const interviewers = getInterviewersForDay(state, state.day)
@@ -62,7 +84,8 @@ export default function Application(props) {
         {...appointment}
         interview={interview}
         interviewers={interviewers}
-        bookInterview={bookInterview}       
+        bookInterview={bookInterview}   
+        cancelInterview={cancelInterview}            
       />) 
   });
 
