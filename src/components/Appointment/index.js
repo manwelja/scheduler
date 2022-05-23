@@ -33,13 +33,12 @@ function save(name, interviewer) {
     student: name,
     interviewer
   };
-
+  //Display the saving indicator
+  transition(SAVING);
 //Book the new interview (call function to add it to the state object)
 //When bookInterview resolves, show the updated schedule page
 bookInterview(id, interview)
 .then((res) => {
-  //Display the saving indicator
-  transition(SAVING);
   transition(SHOW)
 })
 .catch((err) => {
@@ -88,7 +87,7 @@ function cancel(id) {
             interviewer={interview.interviewer.id}
             interviewers = { interviewers }
             onSave ={save}
-            onCancel ={() => transition(EMPTY)}  
+            onCancel ={() => transition(SHOW)}  
 
           />)}    
         {mode === SAVING && (
