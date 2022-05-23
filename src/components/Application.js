@@ -29,6 +29,28 @@ export default function Application(props) {
     })
   },[])
   
+  function bookInterview(id, interview) {
+    //create a new appointment object - use the spread operator to create a shallow copy
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    //create a new appointments object - use the spread operator to create a shallow copy
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    console.log(appointment.interview.interviewer)
+
+  //add the new interview to the scheduler api
+  //return the promise so we can update the schedule page AFTER the api is updated
+ return axios.put(`api/appointments/${id}`, {interview: {student: appointment.interview.student, interviewer: appointment.interview.interviewer}})
+  .then((res) => {
+   //add the new appointment to the state object
+   setState({...state, appointments});
+  })
+} 
+
   const dailyAppointments = getAppointmentsForDay(state, state.day);  
   const interviewers = getInterviewersForDay(state, state.day)
 
@@ -40,6 +62,7 @@ export default function Application(props) {
         {...appointment}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}       
       />) 
   });
 
@@ -69,7 +92,10 @@ export default function Application(props) {
         </section>
        <section className="schedule">
         { apptArray}
-         <Appointment key="last" time="5pm" />
+         <Appointment 
+           key="last" 
+           time="5pm" 
+         />
       </section>
       
     </main>
