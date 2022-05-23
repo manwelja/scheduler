@@ -4,6 +4,7 @@ import Empty from "./Empty";
 import Show from "./Show";
 import Form from "./Form";
 import Status from "./Status";
+import Confirm from "./Confirm";
 
 import useVisualMode from "hooks/useVisualMode";
 
@@ -14,7 +15,7 @@ export default function Appointment(props) {
   const CREATE = "CREATE";
   const SAVING = "SAVING";
   const DELETING = "DELETING";
-  const CONFIRM = "CONFIRM";
+  const CONFIRM_DELETE = "CONFIRM_DELETE";
   
   const{ id, interview, time, interviewers, bookInterview, cancelInterview } = props;
   
@@ -37,9 +38,12 @@ bookInterview(id, interview)
  
 }
 
+function confirm(id) {
+  //confirm that the user wants to delete
+  transition(CONFIRM_DELETE);
+}
+
 function cancel(id) {
-  //conform that the user wants to delete
-  transition(CONFIRM);
   //Display the deleting indicator
   transition(DELETING);
   //delete the selected interview and set the transition state for the block to empty
@@ -58,7 +62,7 @@ function cancel(id) {
           <Show
             student={interview.student}
             interviewer={interview.interviewer}
-            onDelete={() => cancel(id)}
+            onDelete={() => confirm(id)}
           />)}
         {mode === CREATE && (
           <Form
@@ -75,6 +79,12 @@ function cancel(id) {
           <Status
             message={"Deleting"}            
           />)}
+        {mode === CONFIRM_DELETE && (
+          <Confirm  
+            message = "Are you sure you would like to delete?"
+            onConfirm = {() => cancel(id)} 
+            onCancel = {() => transition(SHOW)} 
+          />)}  
     </article>
   );
 
