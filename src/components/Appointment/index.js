@@ -13,6 +13,7 @@ export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
+  const EDIT = "EDIT";
   const SAVING = "SAVING";
   const DELETING = "DELETING";
   const CONFIRM_DELETE = "CONFIRM_DELETE";
@@ -62,6 +63,7 @@ function cancel(id) {
           <Show
             student={interview.student}
             interviewer={interview.interviewer}
+            onEdit={() => transition(EDIT)}
             onDelete={() => confirm(id)}
           />)}
         {mode === CREATE && (
@@ -71,6 +73,15 @@ function cancel(id) {
             onCancel ={() => transition(EMPTY)}  
 
           />)}  
+        {mode === EDIT && (
+          <Form
+            student={interview.student}
+            interviewer={interview.interviewer.id}
+            interviewers = { interviewers }
+            onSave ={save}
+            onCancel ={() => transition(EMPTY)}  
+
+          />)}    
         {mode === SAVING && (
           <Status
             message={"Saving"}            

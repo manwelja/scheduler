@@ -5,9 +5,9 @@ import InterviewerList from "../InterviewerList";
 import Button from "../Button";
 
 export default function Form(props) {
-
+ // console.log(props);
+  console.log(props.interviewer)
   const { interviewers, onSave, onCancel } = props;
-
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
