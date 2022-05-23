@@ -5,6 +5,7 @@ import Show from "./Show";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 
 import useVisualMode from "hooks/useVisualMode";
 
@@ -17,6 +18,8 @@ export default function Appointment(props) {
   const SAVING = "SAVING";
   const DELETING = "DELETING";
   const CONFIRM_DELETE = "CONFIRM_DELETE";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
   
   const{ id, interview, time, interviewers, bookInterview, cancelInterview } = props;
   
@@ -30,13 +33,18 @@ function save(name, interviewer) {
     student: name,
     interviewer
   };
-//Display the saving indicator
-transition(SAVING);
+
 //Book the new interview (call function to add it to the state object)
 //When bookInterview resolves, show the updated schedule page
 bookInterview(id, interview)
-.then(() => transition(SHOW))
- 
+.then((res) => {
+  //Display the saving indicator
+  transition(SAVING);
+  transition(SHOW)
+})
+.catch((err) => {
+  transition(ERROR_SAVE, true)
+})
 }
 
 function confirm(id) {
@@ -51,10 +59,11 @@ function cancel(id) {
   cancelInterview(id)
   .then(() => {
     setTimeout(transition(EMPTY), 1000)
-  });
+  }).catch((err) => {
+    transition(ERROR_DELETE, true);  
+  })
  
 }
-
   return(
     <article className="appointment">
       <Header time={ time }/>
@@ -95,6 +104,16 @@ function cancel(id) {
             message = "Are you sure you would like to delete?"
             onConfirm = {() => cancel(id)} 
             onCancel = {() => transition(SHOW)} 
+          />)}  
+        {mode === ERROR_SAVE && (
+          <Error 
+            message = "Error saving the current interview."
+            onClose = {() => back()}             
+          />)}  
+        {mode === ERROR_DELETE && (
+          <Error  
+            message = "Error deleting the current interview."
+            onClose = {() => back()} 
           />)}  
     </article>
   );

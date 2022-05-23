@@ -46,9 +46,13 @@ export default function Application(props) {
     //return the promise so we can update the schedule page AFTER the api is updated
     return axios.put(`api/appointments/${id}`, {interview: {student: appointment.interview.student, interviewer: appointment.interview.interviewer}})
       .then((res) => {
-      //add the new appointment to the state object
-      setState({...state, appointments});
+       //add the new appointment to the state object
+       setState({...state, appointments});
+       return;
     })
+    //.catch((err) => {
+     //   console.log(err.message)     
+   // })
   } 
   function cancelInterview(id) {
    
@@ -65,12 +69,13 @@ export default function Application(props) {
 
     return axios.delete(`api/appointments/${id}`)
     .then((res) => {
-      //appointments[id].interview= null;
       //delete the appointment from the state object (putting appointments last overwrites what was prev defined in the state object)
-      //console.log(appointments)
       setState({...state, appointments});
-     // console.log("new state", state)
     })
+    //.catch((err) => {
+    //  console.log(err.message)        
+    //  return(err)   
+  //  })
   }
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);  
