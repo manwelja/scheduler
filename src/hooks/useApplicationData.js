@@ -78,20 +78,30 @@ export default function useApplicationData() {
   }
 
   const updateSpots = state => {
+    //declare the state object that is going to be returned after being updated with the current number of available spots 
     const updatedState = {...state};
+
+    //declare an array that will hold all of teh individual day objects in the current state
     const updatedDays = [...state.days];
     
-    //get the currently selected day object
+    //get the currently selected day object (where the appointment is being modified)
     const updatedDay = {...state.days.find((day) => day.name === state.day)};
+
     //retrieve the number of available spots
     const spots = countSpots(state);
+
     //update the number of spots in the "updated" day object
     updatedDay.spots = spots;
+
     //get the index of the currently selected day
     const updatedDayIndex = state.days.findIndex(day => day.name === state.day)
+
     //update the selected day in the object containing all days
     updatedDays[updatedDayIndex] = updatedDay;
+
+    //update the new state object with the updated list of days
     updatedState.days = updatedDays;
+
     return updatedState;
   }
   return { state, setDay, bookInterview, cancelInterview };
