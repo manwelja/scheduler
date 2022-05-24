@@ -33,7 +33,7 @@ export default function Form(props) {
     }  
     if(name && interviewer) setError("");
 
-    props.onSave(name, interviewer);
+    onSave(name, interviewer);
   }  
 
 
@@ -63,7 +63,6 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={ () => cancel() }>Cancel</Button>
-          {/*<Button confirm onClick={ () => {if (student && interviewer) onSave(student, interviewer)}}>Save</Button>*/}
           <Button confirm onClick={ () => { validate(student) }}>Save</Button>
         </section>
       </section>
