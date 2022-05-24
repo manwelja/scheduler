@@ -59,6 +59,7 @@ function cancel(id) {
   .then(() => {
     setTimeout(transition(EMPTY), 1000)
   }).catch((err) => {
+    console.log(err)
     transition(ERROR_DELETE, true);  
   })
  

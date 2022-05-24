@@ -8,6 +8,7 @@ import Appointment from "components/Appointment"
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors"
 
 export default function Application(props) {
+  //declare the functions that are being exported in the useApplicationData hook
   const {
     state,
     setDay,
