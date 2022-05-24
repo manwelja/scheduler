@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
@@ -10,7 +10,7 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
-  const setDay = day => setState({ ...state, day });
+  const setDay = day => {setState({ ...state, day }); console.log(state)};
 
   useEffect(() => {
     Promise.all([

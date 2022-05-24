@@ -3,7 +3,7 @@ import "./DayListItem.scss"
 import classNames from "classnames"
 
 export default function DayListItem(props) {
-
+ 
   //format the "number of spots" text to reflect the actual number of available appointment spots 
   function formatSpots(spots) {
     if(spots === 0) {
@@ -15,7 +15,6 @@ export default function DayListItem(props) {
     if(spots >= 1) {
       return `${spots} spots remaining`;
     }
-
   }
 
   const dayListClass = classNames("day-list__item", 
