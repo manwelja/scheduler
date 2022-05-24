@@ -13,6 +13,7 @@ export default function Form(props) {
   const reset = () => {
     setStudent("");
     setInterviewer(null);
+    setError("");
   }
   const cancel = () => {
     reset();
@@ -21,15 +22,17 @@ export default function Form(props) {
 
   //Check to ensure both student name and interviewer fields are not blank before submit
   function validate(name) {
-    console.log(name);
+    
     if (name === "") {
       setError("Student name cannot be blank");
       return;
     }
-  if (interviewer === null) {
-    setError("Please select an interviewer");
-    return;
-  }  
+    if (interviewer === null) {
+      setError("Please select an interviewer");
+      return;
+    }  
+    if(name && interviewer) setError("");
+
     props.onSave(name, interviewer);
   }  
 
