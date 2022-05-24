@@ -40,7 +40,7 @@ export default function useApplicationData() {
     return axios.put(`api/appointments/${id}`, {interview: {student: appointment.interview.student, interviewer: appointment.interview.interviewer}})
       .then((res) => {
          const newState = updateSpots({...state, appointments});
-        //update the state with the updated appointments object and nmumber of slots
+        //update the state with the updated appointments object and number of slots
         setState({...newState});
         return;
       })
@@ -80,7 +80,7 @@ export default function useApplicationData() {
   const updateSpots = state => {
     //declare the state object that is going to be returned after being updated with the current number of available spots 
     const updatedState = {...state};
-
+  
     //declare an array that will hold all of teh individual day objects in the current state
     const updatedDays = [...state.days];
     
