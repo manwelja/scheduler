@@ -42,6 +42,7 @@ bookInterview(id, interview)
   transition(SHOW)
 })
 .catch((err) => {
+  //if there was an error with the booking, toggle to the ERROR_SAVE transition but don't add it to the history
   transition(ERROR_SAVE, true)
 })
 }
@@ -60,6 +61,7 @@ function cancel(id) {
     setTimeout(transition(EMPTY), 1000)
   }).catch((err) => {
     console.log(err)
+    //if there was an error with the deletion, toggle to the ERROR_DELETE transition but don't add it to the history
     transition(ERROR_DELETE, true);  
   })
  
@@ -67,7 +69,9 @@ function cancel(id) {
   return(
     <article className="appointment">
       <Header time={ time }/>
-        {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}        
+      {/*show an empty appointment slot*/}  
+        {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}     
+        {/*show an interview item*/}     
         {mode === SHOW && (
           <Show
             student={interview.student}
@@ -75,6 +79,7 @@ function cancel(id) {
             onEdit={() => transition(EDIT)}
             onDelete={() => confirm(id)}
           />)}
+        {/*show an empty form*/}    
         {mode === CREATE && (
           <Form
             interviewers = { interviewers }
@@ -82,6 +87,7 @@ function cancel(id) {
             onCancel ={() => transition(EMPTY)}  
 
           />)}  
+        {/*show the editable form with any pre-existing values*/}    
         {mode === EDIT && (
           <Form
             student={interview.student}
@@ -91,25 +97,30 @@ function cancel(id) {
             onCancel ={() => transition(SHOW)}  
 
           />)}    
+        {/*show status image with saving text*/}    
         {mode === SAVING && (
           <Status
             message={"Saving"}            
           />)}
+        {/*show status image with deleting text*/}  
         {mode === DELETING && (
           <Status
             message={"Deleting"}            
           />)}
+        {/*confirm delete  action*/}
         {mode === CONFIRM_DELETE && (
           <Confirm  
             message = "Are you sure you would like to delete?"
             onConfirm = {() => cancel(id)} 
             onCancel = {() => transition(SHOW)} 
           />)}  
+        {/*show an error message in place of the appointment slot*/}    
         {mode === ERROR_SAVE && (
           <Error 
             message = "Error saving the current interview."
             onClose = {() => back()}             
           />)}  
+        {/*show an error message in place of the appointment slot*/}      
         {mode === ERROR_DELETE && (
           <Error  
             message = "Error deleting the current interview."

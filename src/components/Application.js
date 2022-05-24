@@ -18,7 +18,7 @@ export default function Application(props) {
   
 
   const interviewers = getInterviewersForDay(state, state.day);
-
+  //return appointmwnt components for each appoiontment that exists for the currently selected day
   const appointments = getAppointmentsForDay(state, state.day).map(
     appointment => {
       return (
@@ -33,7 +33,7 @@ export default function Application(props) {
       );
     }
   );
-
+  //return the populated navigation sidebar and appointment slots components
   return (
     <main className="layout">
       <section className="sidebar">

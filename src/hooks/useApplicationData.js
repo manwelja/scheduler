@@ -39,8 +39,7 @@ export default function useApplicationData() {
     //return the promise so we can update the schedule page AFTER the api is updated
     return axios.put(`api/appointments/${id}`, {interview: {student: appointment.interview.student, interviewer: appointment.interview.interviewer}})
       .then((res) => {
-        const tempState = {...state, appointments};
-        const newState = updateSpots(tempState);
+         const newState = updateSpots({...state, appointments});
         //update the state with the updated appointments object and nmumber of slots
         setState({...newState});
         return;
@@ -61,8 +60,7 @@ export default function useApplicationData() {
     return axios.delete(`api/appointments/${id}`)
     .then((res) => {
       //delete the appointment from the state object (putting appointments last overwrites what was prev defined in the state object)
-      const tempState = {...state, appointments};
-      const newState = updateSpots(tempState);
+      const newState = updateSpots({...state, appointments});
       //count amount of of null interviews for the day 
       setState({...newState});
       return;
