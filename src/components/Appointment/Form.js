@@ -4,6 +4,7 @@ import "./styles.scss";
 import InterviewerList from "../InterviewerList";
 import Button from "../Button";
 
+//Component to display new/edit interview form to the user for input
 export default function Form(props) {
   const { interviewers, onSave, onCancel } = props;
   const [student, setStudent] = useState(props.student || "");

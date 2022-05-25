@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../Button"
 import "./styles.scss";
 
+//Component to display confirm/cancel prompt to the user
 export default function Confirm(props) {
   const { message, onConfirm, onCancel } = props;
   return (

@@ -7,6 +7,7 @@ import DayList from "components/DayList";
 import Appointment from "components/Appointment"
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors"
 
+//Maain component that is responsible for invoking children to display navigation and schedule content
 export default function Application(props) {
   //declare the functions that are being exported in the useApplicationData hook
   const {

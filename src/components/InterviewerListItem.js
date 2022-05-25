@@ -2,6 +2,7 @@ import React from "react";
 import "./InterviewerListItem.scss";
 import classNames from "classnames";
 
+//Component that displays individual interviewer data
 export default function InterviewerListItem(props) {
   //return an item for each interviewer passed in as a prop
   const interviewerListClass = classNames("interviewers__item",

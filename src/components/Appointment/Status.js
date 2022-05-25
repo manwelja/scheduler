@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.scss";
 
+//Component that displays animated status image in the schedule when an action in is progress
 export default function Status(props) {
 
   const { message } = props;

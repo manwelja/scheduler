@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.scss";
 
+//Component that displays error message to the user
 export default function Error(props) {
   const { message, onClose } = props;
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+//function responsible for managing all state changes in the application 
 export default function useApplicationData() {
 
   const [state, setState] = useState({
@@ -12,6 +13,7 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
+  //populate the schedule when the application loads
   useEffect(() => {        
     Promise.all([      
       axios.get("/api/days"),
@@ -43,7 +45,7 @@ export default function useApplicationData() {
         //update the state with the updated appointments object and number of slots
         setState({...newState});
         return;
-      })
+      }).catch((err) => console.log(err))
     }
   function cancelInterview(id) {
     const appointment = {

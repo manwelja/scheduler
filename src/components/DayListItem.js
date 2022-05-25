@@ -2,6 +2,7 @@ import React from "react";
 import "./DayListItem.scss"
 import classNames from "classnames"
 
+//component responsible for rendering individual days in the navigation side bar
 export default function DayListItem(props) {
  
   //format the "number of spots" text to reflect the actual number of available appointment spots 

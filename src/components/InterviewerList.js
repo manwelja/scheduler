@@ -3,6 +3,7 @@ import InterviewerListItem from "components/InterviewerListItem";
 import "./InterviewerList.scss";
 import PropTypes from "prop-types";
 
+//Component responsible for invoking one InterviewListItem for each interviewer in the data set
 export default function InterviewerList(props) {
 
   const interviewerItem = props.interviewers.map((interviewerData) => {

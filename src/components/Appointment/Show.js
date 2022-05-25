@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.scss";
 
+//Component that displays existing appointment in the schedule
 export default function Show(props) {
 const { student, interviewer, onEdit, onDelete } = props;
    return (

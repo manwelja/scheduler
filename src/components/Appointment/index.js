@@ -67,7 +67,7 @@ function cancel(id) {
  
 }
   return(
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Header time={ time }/>
       {/*show an empty appointment slot*/}  
         {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}     

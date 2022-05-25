@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.scss";
 
+//Component to display empty time slots in the schedule
 export default function Empty(props) {
 
   return (

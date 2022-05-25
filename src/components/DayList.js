@@ -1,6 +1,7 @@
 import React from "react";
 import DayListItem from "components/DayListItem";
 
+//Component that invokes a DayListItem child (to be rendered in the navigation sidebar) for each day in the data set
 export default function DayList(props) {
   const dayItem = props.days.map((dayData) => {
     //return a populated daylist item (to be displayed in the navigation sidebar) for each day in the data set
