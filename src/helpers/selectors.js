@@ -12,7 +12,7 @@ export function getAppointmentsForDay(state, day) {
   
   //get all appt objects that correspond to the appt ids for the selected day
   appointmentKeysArr.forEach((element) => {
-    if (state.appointments[String(element)]) apptArr.push(state.appointments[String(element)])     
+    if (state.appointments[String(element)]) apptArr.push(state.appointments[String(element)]);  
   });    
   
   return apptArr;
@@ -45,7 +45,7 @@ export function getInterviewersForDay(state, day) {
   
   //get all interviewer objects that correspond to the interveiwer ids for the selected day
   interviewersKeysArr.forEach((element) => {
-    if (state.interviewers[String(element)]) interviewerArr.push(state.interviewers[String(element)])     
+    if (state.interviewers[String(element)]) interviewerArr.push(state.interviewers[String(element)]);   
   });    
   
   return interviewerArr;

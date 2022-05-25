@@ -39,11 +39,11 @@ function save(name, interviewer) {
 //When bookInterview resolves, show the updated schedule page
 bookInterview(id, interview)
 .then((res) => {
-  transition(SHOW)
+  transition(SHOW);
 })
 .catch((err) => {
   //if there was an error with the booking, toggle to the ERROR_SAVE transition but don't add it to the history
-  transition(ERROR_SAVE, true)
+  transition(ERROR_SAVE, true);
 })
 }
 
@@ -58,9 +58,8 @@ function cancel(id) {
   //delete the selected interview and set the transition state for the block to empty
   cancelInterview(id)
   .then(() => {
-    setTimeout(transition(EMPTY), 1000)
+    setTimeout(transition(EMPTY), 1000);
   }).catch((err) => {
-    console.log(err)
     //if there was an error with the deletion, toggle to the ERROR_DELETE transition but don't add it to the history
     transition(ERROR_DELETE, true);  
   })

@@ -13,7 +13,5 @@ export default function Confirm(props) {
         <Button danger onClick={ onConfirm }>Confirm</Button>
       </section>
     </main>  
-  )
-
-
+  );
 }
