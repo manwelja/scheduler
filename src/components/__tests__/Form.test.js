@@ -141,18 +141,17 @@ describe("Form", () => {
     const { getByText, getByPlaceholderText, queryByText } = render(
       <Form
         interviewers={interviewers}      
-        name="Lydia Mill-Jones"
+        name=""
         onSave={onSave}
         onCancel={onCancel}
       />
     );
-  
     fireEvent.click(getByText("Save"));
-  
-    fireEvent.change(getByPlaceholderText("Enter Student Name"), {
-      target: { value: "Lydia Miller-Jones" }
+    
+    fireEvent.change(getByPlaceholderText("Enter Student Name"), {      
+      target: { value: "" }
     });
-  
+          
     fireEvent.click(getByText("Cancel"));
   
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
