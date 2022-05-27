@@ -19,5 +19,5 @@ export default function useVisualMode(initial) {
     history.pop();
     setHistory(history);    
   };
-  return { mode, transition, back };
+ // return { mode, transition, back };
 }
